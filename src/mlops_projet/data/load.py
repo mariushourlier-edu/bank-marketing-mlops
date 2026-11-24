@@ -12,4 +12,4 @@ def load_bank_data(path=DATA_PATH, validate=True):
     df = pd.read_csv(path, sep=";")
     if validate:
         df = validate_bank_data(df)
-    return pd.read_csv(path, sep=";")
+    return df
