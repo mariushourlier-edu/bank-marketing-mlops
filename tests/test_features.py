@@ -15,6 +15,7 @@ def test_nouvelles_features():
     assert set(features["deja_contacte"]) == {0, 1}
     assert set(features["solde_negatif"]) == {0, 1}
     assert set(features["tranche_age"]) == {"18-29", "30-45", "46-60", "61+"}
+    assert set(features["solde_eleve"]) == {0, 1}
  
  
 def test_cible():
@@ -30,3 +31,18 @@ def test_meme_calcul_entrainement_et_prediction():
     client = df.iloc[0].drop(["duration", "y"]).to_dict()
     prediction = build_features(pd.DataFrame([client]))
     pd.testing.assert_frame_equal(entrainement, prediction)
+
+
+
+def test_solde_eleve():
+    df = pd.DataFrame({
+        "age": [25, 40, 60],
+        "balance": [500, 7500, -200],
+        "pdays": [-1, 10, -1],
+        "campaign": [1, 2, 1],
+        "previous": [0, 1, 0],
+    })
+
+    result = build_features(df)
+
+    assert result["solde_eleve"].tolist() == [0, 1, 0]
