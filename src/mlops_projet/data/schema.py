@@ -50,7 +50,8 @@ bank_schema = pa.DataFrameSchema(
                 "jul", "aug", "sep", "oct", "nov", "dec",
             ]),
         ),
-        "duration": pa.Column(int, pa.Check.ge(0)),
+        #"duration": pa.Column(int, pa.Check.ge(0)),
+        "duration": pa.Column(int, pa.Check.in_range(0,11_000)), # première règle ajoutée
         "campaign": pa.Column(int, pa.Check.ge(1)),
         "pdays": pa.Column(int, pa.Check.ge(-1)),
         "previous": pa.Column(int, pa.Check.ge(0)),

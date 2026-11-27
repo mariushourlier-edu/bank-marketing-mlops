@@ -27,3 +27,9 @@ def test_cible_inconnue(df):
      casse.loc[0, "y"] = "peut-etre"
      with pytest.raises(pa.errors.SchemaErrors):
          validate_bank_data(casse)
+
+def test_duration(df):
+      casse = df.copy()
+      casse.loc[0, "duration"] = 18_000
+      with pytest.raises(pa.errors.SchemaErrors):
+           validate_bank_data(casse)

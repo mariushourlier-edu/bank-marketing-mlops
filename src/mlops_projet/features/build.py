@@ -15,6 +15,7 @@ def build_features(df):
     features = df.drop(columns=["duration", "y"], errors="ignore")
     features["deja_contacte"] = (df["pdays"] != -1).astype(int)
     features["solde_negatif"] = (df["balance"] < 0).astype(int)
+    features["solde_eleve"] = (df["balance"] > 3000).astype(int) #feature ajoutée 
     features["nb_contacts_total"] = df["campaign"] + df["previous"]
     features["tranche_age"] = pd.cut(
         df["age"],
